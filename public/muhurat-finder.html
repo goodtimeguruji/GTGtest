@@ -1,0 +1,1220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"Good Time Guruji",
+  "url":"https://goodtimeguruji.in",
+  "logo":"https://goodtimeguruji.in/assets/img/logo.png",
+  "email":"support@goodtimeguruji.in",
+  "description":"Personalized Muhurat Finder based on Vedic Astrology, Nakshatra, Rasi and Panchang calculations."
+}
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhurat Finder | Find Auspicious Dates by Nakshatra & Rasi</title>
+  <meta name="description"
+    content="Get personalized Muhurat recommendations based on your Nakshatra, Rasi, location, and event type. Find auspicious dates for marriage, Gruhapravesam, business, investments, travel, and more.">
+  <meta name="keywords"
+    content="Muhurat Calculator, Muhurat Finder, Nakshatra Muhurat, Rasi Muhurat, Marriage Muhurat, Gruhapravesam Muhurat, Vedic Astrology">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://goodtimeguruji.in/muhurat-finder.html">
+  <meta property="og:title" content="Find Your Personalized Muhurat">
+  <meta property="og:description"
+    content="Accurate Muhurat timings based on Vedic astrology, Nakshatra, Rasi, and location.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://goodtimeguruji.in/muhurat-finder.html">
+  <meta property="og:image" content="https://goodtimeguruji.in/assets/img/logo.png">
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./assets/fontawsome/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/fontawsome/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="./assets/css/bootstrap-icons.css" />
+  <script src="./assets/js/toast.js"></script>
+  <script src="./assets/js/auth.js"></script>
+  <script>
+    // Keep the new Profile / Search History drawer links in sync with
+    // the existing logged-in/out state that auth.js controls via #mobileUserMenu.
+    (function syncDrawerExtraLinks() {
+      const menu = document.getElementById("mobileUserMenu");
+      const extras = document.querySelectorAll(".drawer-extra-link");
+      if (!menu || !extras.length) return;
+
+      function apply() {
+        const visible = menu.style.display !== "none";
+        extras.forEach(el => { el.style.display = visible ? "" : "none"; });
+      }
+
+      apply();
+      new MutationObserver(apply).observe(menu, { attributes: true, attributeFilter: ["style"] });
+    })();
+  </script>
+
+</head>
+
+<body>
+  <header class="site-header">
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      <div class="top-container">
+        <a href="index.html">
+          <div class="brand-center">
+            <span class="logo-box">
+              <img src="./assets/img/logo.png" alt="Good Time Guruji Logo" />
+            </span>
+
+            <!-- <div class="top-center">
+                <h1>
+                  GOOD TIME
+                  <span>GURUJI</span>
+                </h1>
+                <h6 class="tagline">Ancient Hindu Insight. Modern Technology. Smarter Decisions.</h6>
+              </div> -->
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- MENU BAR -->
+    <div class="menu-bar">
+      <div class="menu-container">
+        <!-- Desktop Nav -->
+        <nav class="nav-desktop">
+          <a href="index.html">Home</a>
+          <a href="muhurat-finder.html">Muhurat Finder</a>
+          <a href="services.html">Muhurat Services</a>
+
+          <!-- <div class="nav-dropdown">
+          <button class="dropbtn" type="button">
+            Services <span class="chev">▾</span>
+          </button>
+        <div class="dropdown-menu">
+            <a href="#muhurat">Muhurat Finder</a>
+            <a href="#consult">1:1 Consultation</a>
+            <a href="#puja">Puja Booking</a>
+            <a href="#reports">Reports</a>
+          </div> 
+        </div> -->
+
+          <a href="about-us.html">About Us</a>
+          <a href="contact-us.html">Contact Us</a>
+          <div class="user-nav-dropdown" id="userDropdown" style="display:none;">
+            <button class="user-nav-btn" type="button" aria-haspopup="true">
+              <span class="user-initial" id="usernameInitial">U</span>
+              <span id="usernameDisplay">User</span>
+              <span class="chev-down">&#x25BE;</span>
+            </button>
+            <div class="user-nav-menu">
+              <a href="profile.html"><i class="bi bi-person-circle me-2"></i>My Profile</a>
+              <a href="search-history.html"><i class="bi bi-clock-history me-2"></i>Search History</a>
+              <a href="#" id="logoutBtn"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
+            </div>
+          </div>
+
+          <a href="login.html" class="login-btn" id="loginBtn">Login / Sign Up</a>
+        </nav>
+
+        <!-- Mobile Button (shows in menu bar) -->
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Mobile Drawer -->
+    <aside class="drawer" id="drawer" aria-hidden="true">
+      <div class="drawer-head">
+        <div class="drawer-title">
+          <strong>Menu</strong>
+        </div>
+        <button class="drawer-close" id="closeBtn" aria-label="Close menu">✕</button>
+      </div>
+
+      <!-- Logged-in user card (shown only when authenticated) -->
+      <div class="drawer-user-card" id="mobileUserMenu" style="display:none;">
+        <div class="drawer-user-avatar" id="mobileUsernameInitial">U</div>
+        <div class="drawer-user-info">
+          <span class="drawer-user-label">Signed in as</span>
+          <span class="drawer-user-name" id="mobileUsername">User</span>
+        </div>
+        <a href="#" class="drawer-logout-btn" id="mobileLogoutBtn" aria-label="Logout">
+          <i class="bi bi-box-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Logged-out prompt (shown only when not authenticated) -->
+      <a href="login.html" class="drawer-login-card m-login" id="mobileLoginBtn">
+        <i class="bi bi-person-circle"></i>
+        <span>Login / Sign Up</span>
+      </a>
+
+      <nav class="nav-mobile">
+        <a href="index.html" class="m-link">Home</a>
+        <a href="muhurat-finder.html" class="m-link">Muhurat Finder</a>
+        <a href="services.html" class="m-link">Muhurat Services</a>
+
+        <!-- <a class="m-dropdown-btn" id="mDropBtn" >
+        Services <span id="mChev">▾</span>
+      </a>
+      <div class="m-dropdown" id="mDropdown">
+        <a href="#" class="m-sublink">Muhurat Finder</a>
+        <a href="#" class="m-sublink">1:1 Consultation</a>
+        <a href="#" class="m-sublink">Puja Booking</a>
+        <a href="#" class="m-sublink">Reports</a>
+      </div> -->
+
+        <a href="about-us.html" class="m-link">About Us</a>
+        <a href="contact-us.html" class="m-link">Contact Us</a>
+        <a href="profile.html" class="m-link drawer-extra-link" id="mobileProfileLink" style="display:none;"><i
+            class="bi bi-person-circle me-2"></i>My Profile</a>
+        <a href="search-history.html" class="m-link drawer-extra-link" id="mobileHistoryLink" style="display:none;"><i
+            class="bi bi-clock-history me-2"></i>Search History</a>
+      </nav>
+    </aside>
+  </header>
+
+
+  <!-- INNER BANNER -->
+  <!-- <section class="inner-banner service-inner-banner">
+      <div class="inner-banner-overlay"></div>
+
+      <div class="container h-100">
+        <div class="row h-100 align-items-center">
+          <div class="col-12 text-center">
+            <h1 class="inner-banner-title">Muhurat Finder</h1>
+
+            <div class="inner-breadcrumb">
+              <a href="index.html">Home</a>
+              <span class="divider">/</span>
+              <span class="current">Muhurat Finder</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+  <section class="astro-form-v2 py-5" id="service-form">
+    <div class="container">
+      <!-- Heading -->
+      <div class="row justify-content-center mb-4">
+        <div class="col-lg-11 text-center">
+          <h2 class="af-title mb-2">Muhurat Finder</h2>
+          <p class="af-subtitle mb-0">Select details below to find the best/good time.</p>
+          <p class="af-subtitle mb-0 mt-2" style="font-size:14px;">
+            Not sure which function to pick? <a href="services.html">Browse all Muhurat services</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="af-card">
+            <form id="astroServiceForm">
+              <div class="row justify-content-center">
+                <div class="col-lg-9">
+                  <!-- LOCATION -->
+                  <div class="row align-items-center mb-3">
+                    <div class="col-md-4 text-md-end">
+                      <div class="form-label mb-0">Location</div>
+                    </div>
+                    <div class="col-md-8">
+                      <div style="position: relative;">
+                        <input type="text" id="locationInput" class="form-control af-input af-box"
+                          placeholder="Enter Your Location" autocomplete="off" required />
+
+                        <!-- Suggestions -->
+                        <div id="locationSuggestions" class="af-suggestions"></div>
+                      </div>
+
+                      <!-- Hidden fields -->
+                      <input type="hidden" id="lat">
+                      <input type="hidden" id="lon">
+                      <input type="hidden" id="timezone">
+                    </div>
+                  </div>
+
+                  <!-- NAKSHATRA -->
+                  <div class="row align-items-center mb-3">
+                    <div class="col-md-4 text-md-end">
+                      <div class="form-label mb-0">Nakshatram</div>
+                    </div>
+                    <div class="col-md-8">
+                      <select id="nakshatram" class="form-select af-input af-box" required>
+                        <option value="" selected disabled>Nakshatra / Birth Star</option>
+                        <option value="Ashwini">Ashvini / Ashvathi</option>
+                        <option value="Bharani">Bharani</option>
+                        <option value="Krittika">Krittika / Karthigai</option>
+                        <option value="Rohini">Rohini</option>
+                        <option value="Mrigashira">Mrigashira / Mrigaseerisham</option>
+                        <option value="Ardhra">Ardra / Thiruvathirai</option>
+                        <option value="Punarvasu">Punarvasu / Punarpoosam</option>
+                        <option value="Pushya">Pushya / Poosam</option>
+                        <option value="Ashleysha">Ashlesha / Ayilyam</option>
+                        <option value="Magha">Magha / Magham</option>
+                        <option value="Purva Phalguni">Purva Phalguni / Pooram</option>
+                        <option value="Uttara Phalguni">Uttara Phalguni / Uthram</option>
+                        <option value="Hasta">Hasta / Hastham</option>
+                        <option value="Chitra">Chitra / Chithirai</option>
+                        <option value="Swati">Swati / Swathi</option>
+                        <option value="Vishakha">Vishakha / Vishakam</option>
+                        <option value="Anuradha">Anuradha / Anusham</option>
+                        <option value="Jyeshtha">Jyeshtha / Kettai</option>
+                        <option value="Moola">Moola / Moolam</option>
+                        <option value="Purva Ashadha">Purva Ashadha / Pooradam</option>
+                        <option value="Uttara Ashadha">Uttara Ashadha / Uthradam</option>
+                        <option value="Shravan">Shravana / Thiruvonam</option>
+                        <option value="Dhanishta">Dhanishta / Avittam</option>
+                        <option value="Shatabhisha">Shatabhisha / Sathayam</option>
+                        <option value="Purva Bhadrapada">Purva Bhadrapada / Purattadhi</option>
+                        <option value="Uttara Bhadrapada">Uttara Bhadrapada / Uthirattadhi</option>
+                        <option value="Revati">Revati / Revathi</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- RASI -->
+                  <div class="row align-items-center mb-3">
+                    <div class="col-md-4 text-md-end">
+                      <div class="form-label mb-0">Rasi (Zodiac)</div>
+                    </div>
+                    <div class="col-md-8">
+                      <select id="rasi" class="form-select af-input af-box" required>
+                        <option value="" selected disabled>Rasi / Birth Zodiac Sign</option>
+                        <option value="Aries">Aries (Mesham)</option>
+                        <option value="Taurus">Taurus (Rishabam)</option>
+                        <option value="Gemini">Gemini (Mithunam)</option>
+                        <option value="Cancer">Cancer (Kadagam)</option>
+                        <option value="Leo">Leo (Simham)</option>
+                        <option value="Virgo">Virgo (Kanni)</option>
+                        <option value="Libra">Libra (Thulam)</option>
+                        <option value="Scorpio">Scorpio (Vrischikam)</option>
+                        <option value="Sagittarius">Sagittarius (Dhanusu)</option>
+                        <option value="Capricorn">Capricorn (Makaram)</option>
+                        <option value="Aquarius">Aquarius (Kumbam)</option>
+                        <option value="Pisces">Pisces (Meenam)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- FUNCTION LIST -->
+                  <div class="row align-items-center mb-3">
+                    <div class="col-md-4 text-md-end">
+                      <div class="form-label mb-0">Muhurat For</div>
+                    </div>
+                    <div class="col-md-8">
+                      <select id="functionService" class="form-select af-input af-box" required>
+                        <option value="" selected disabled>List of Functions</option>
+                        <option value="runAuspiciousCheckAcrossDatesAksharaaramba">Aksharaarambham / Initiation into
+                          Learning</option>
+                        <option value="runAuspiciousCheckAcrossDatesAnnaprasana">Annaprasana / First Feeding Ceremony
+                        </option>
+                        <option value="runAuspiciousCheckAcrossDatesArogyaSnanam">Arogya Snanam / Ritual Healing Bath
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesChildCradling">Child Cradling / Cradle Ceremony
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesConstruction">Construction / House Construction
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesCultivation">Cultivation / Commencement of
+                          Cultivation</option>
+
+                        <option value="runAuspiciousCheckAcrossDatesCuttingGrains">Cutting Grains / Harvesting Ceremony
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesDeivaPrathishta">Deiva Prathistha / Consecration of
+                          Deity</option>
+
+                        <option value="runAuspiciousCheckAcrossDatesDeliveryAdmission">Delivery Admission / Hospital
+                          Admission for Childbirth</option>
+
+                        <option value="runAuspiciousCheckAcrossDatesExamFees">Exam Fees / Examination Registration
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesGruhaPravesam">Gruhapravesam / Housewarming Ceremony
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesHeadShave">Head Shaving / First Tonsure Ceremony
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesInvestment">Investment / Financial Investment
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesLandRegistration">Land Registration / Property
+                          Registration</option>
+
+                        <option value="runAuspiciousCheckAcrossDatesNamakarana">Namakarana / Naming Ceremony of Baby
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesNewPortfolio">New Portfolio / New Investment
+                          Portfolio</option>
+
+                        <option value="runAuspiciousCheckAcrossDatesNilaiPadi">Nilai Padi / Main Entrance Installation
+                          Ceremony</option>
+
+                        <option value="runAuspiciousCheckAcrossDatesOilBath">Oil Bath / Oil Bath Ritual</option>
+
+                        <option value="runAuspiciousCheckAcrossDatesPlantingSeeds">Planting Seeds / Seed Sowing Ceremony
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesPumsuvanam">Pumsavana / Prenatal Ritual Ceremony
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesSeemantham">Seemantham / Baby Shower Ceremony
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesShantimuhurtam">Shanti Muhurtam / Auspicious
+                          Ceremony
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesStartBuisiness">Start Business / Commencement of
+                          Business Operations</option>
+
+                        <option value="runAuspiciousCheckAcrossDatesSurgery">Surgery / Surgical Procedure</option>
+
+                        <option value="runAuspiciousCheckAcrossDatesTakingMedicine">Taking Medicine / First Dose of
+                          Medical Treatment</option>
+
+                        <option value="runAuspiciousCheckAcrossDatesTravel">Travel / Journey</option>
+
+                        <option value="runAuspiciousCheckAcrossDatesUpanayanam">Upanayanam / Sacred Thread Ceremony
+                        </option>
+
+                        <option value="runAuspiciousCheckAcrossDatesVehiclePurchase">Vehicle Purchase / Vehicle Purchase
+                          Ceremony</option>
+
+                        <option value="runAuspiciousCheckAcrossDatesVidhyaarambha">Vidyarambham / Commencement of
+                          Education</option>
+
+                        <option value="runAuspiciousCheckAcrossDatesVishnuBali">Vishnu Bali / Vishnu Bali Ceremony
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- DATE RANGE -->
+                  <div class="row align-items-center mb-3">
+                    <div class="col-md-4 text-md-end">
+                      <div class="form-label mb-0">Select Date</div>
+                    </div>
+
+                    <div class="col-md-8">
+                      <div class="row g-3">
+                        <div class=" col-sm-12 col-md-6">
+                          <label class="small mb-1">From Date</label>
+                          <input type="date" id="fromDate" class="form-control af-input af-datebox w-100" required />
+                        </div>
+
+                        <div class=" col-sm-12 col-md-6">
+                          <label class="small mb-1">To Date <span id="toDateHint" class="text-muted"
+                              style="font-size:11px; display:none;">(max 3 months)</span></label>
+                          <input type="text" id="toDate" class="form-control af-input af-datebox w-100"
+                            placeholder="— auto-set —" readonly disabled style="cursor:default;" />
+                          <input type="hidden" id="toDateValue" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- TERMS + SUBMIT -->
+                  <div class="text-center mt-3">
+
+                    <!-- Login prompt — shown only when logged out -->
+                    <div id="loginPromptMsg" style="display:none;" class="mb-2">
+                      <span style="font-size:14px; color:#888;">
+                        Please
+                        <a href="login.html" style="color:var(--dark-brown); font-weight:600;">login / sign up</a>
+                        to proceed.
+                      </span>
+                    </div>
+
+                    <div class="d-flex justify-content-center align-items-center gap-2 mb-3">
+                      <input type="checkbox" id="terms" required
+                        style="width:16px; height:16px; flex-shrink:0; cursor:pointer; accent-color:var(--dark-brown);" />
+                      <label for="terms" class="mb-0"
+                        style="font-size:14px; cursor:pointer; user-select:none; margin-left:6px;">
+                        I agree to
+                        <a href="#" data-toggle="modal" data-target="#termsModal">Terms &amp; Conditions</a>
+                      </label>
+                    </div>
+
+                    <button type="button" id="submitBtn" class="af-btn af-submit" disabled>
+                      <span id="btnText">Find Muhurat</span>
+                      <span id="btnLoader" class="spinner-border spinner-border-sm ms-2" style="display:none;"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- TERMS MODAL -->
+  <div class="modal fade" id="termsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+
+        <!-- HEADER -->
+        <div class="modal-header">
+          <h5 class="modal-title">Terms & Conditions</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- BODY -->
+        <div class="modal-body" style="font-size:14px; line-height:1.7;">
+
+          <h6 class="fw-bold text-center mb-3">TERMS AND CONDITIONS</h6>
+
+          <p>This document is an electronic record in terms of the Information Technology Act, 2000 and rules there
+            under in force, and the provisions pertaining to electronic records in various statutes as amended by the
+            Information Technology Act, 2000 from time to time. This electronic record is generated by a computer system
+            and does not require any physical or digital signatures for validation, consent or acceptance.</p>
+
+          <p>By using and/or visiting this application and/or using the services of Goodtimeguruji or by clicking "I
+            accept/I agree", you signify your assent to these terms and conditions. If you do not agree to any of these
+            terms, then please do not use the application or the services of Goodtimeguruji. By agreeing to these terms
+            and conditions or by downloading, installing or otherwise using the services, you accept and agree to the
+            terms and conditions herein.</p>
+
+          <p>By using the services of Goodtimeguruji, you agree to be bound by this agreement. You are only authorized
+            to use the services of Goodtimeguruji (regardless of whether your access or use is intended) if you agree to
+            abide by all applicable laws and to this agreement.</p>
+
+          <p>Please read this agreement carefully and save it. If you do not agree with it, you should leave the
+            application and discontinue use of the services immediately. If you wish to make use of the services, you
+            must read this agreement.</p>
+
+          <p>In order to participate in certain other services provided through the application, you will be notified
+            that you are required to agree to additional terms and conditions. Goodtimeguruji may modify this agreement
+            from time to time and such modification shall be effective immediately on updation of this agreement. You
+            agree to be bound to any changes to this agreement when you use the services after any such modification is
+            updated. It is therefore important that you review this agreement regularly upon each use of the services to
+            ensure you are updated as to any changes. Goodtimeguruji reserves the right at its sole discretion, to
+            change, modify, add or remove portions of these terms, at any time.</p>
+
+          <h6 class="fw-bold mt-3">DEFINITIONS</h6>
+          <p><strong>BANK ACCOUNT:</strong> "Bank Account(s)" shall mean a bank account maintained by the user with a
+            bank.</p>
+          <p><strong>GOODTIMEGURUJI / COMPANY:</strong> "Goodtimeguruji/company" shall mean Goodtimeguruji, a
+            proprietorship having its office at Thanjavur District. It is neither providing the service nor selling any
+            product by itself and plays absolutely no direct role in recommendations.</p>
+          <p><strong>APPLICATION / WEBSITE:</strong> "Application/Website" means Goodtimeguruji, the platform, the
+            website application or the algorithm created, developed, designed and made available by Goodtimeguruji.</p>
+          <p><strong>Goodtimeguruji / WE:</strong> "Goodtimeguruji/WE" shall mean Goodtimeguruji, a proprietorship
+            having its registered office at No 63, Mahadhana Street, Thiruvidaimaruthur, Thanjavur District – 612104 and
+            shall include its affiliates.</p>
+          <p><strong>Good Time:</strong> Good Time is to find out a best time based on the Nakshatra (Birth Star) of the
+            user for various functions/occasions.</p>
+          <p><strong>MOBILE PHONE NUMBER:</strong> "Mobile Phone Number" shall mean the number specified by the User
+            during registration with Goodtimeguruji or during usage of the Application.</p>
+          <p><strong>PERSONAL INFORMATION:</strong> "Personal information" shall mean any information about the user
+            provided by the user and obtained by Goodtimeguruji in relation to the application.</p>
+          <p><strong>USER ACCOUNT:</strong> "User Account" shall mean the registered Application account of the User
+            with Goodtimeguruji for use of the Application and services offered by Goodtimeguruji.</p>
+          <p><strong>USER DATA:</strong> "User Data" shall include any data, information, pattern, behaviour, documents,
+            materials, transactions and location, of the User.</p>
+          <p><strong>YOU / YOUR / USER:</strong> "You/Your/User" shall mean any person who accesses, downloads,
+            installs, utilizes, operates or views the Application or Services offered by Goodtimeguruji.</p>
+
+          <h6 class="fw-bold mt-3">FACILITATION OF GOOD TIME</h6>
+          <p>Goodtimeguruji merely acts as a facilitator to find the best time for functions for the user as per the
+            requirements of the user. Goodtimeguruji does not undertake any other services other than the facilitation.
+          </p>
+          <p>The following fair disclosures are made by Goodtimeguruji for defining the relationship between
+            Goodtimeguruji and the USER &amp; for limitation of liability:</p>
+          <ul>
+            <li>The User agrees that Goodtimeguruji is not liable for any action, liability, cost, claim, loss, damage,
+              proceeding or expense suffered or incurred if directly or indirectly and is caused by any act of the User
+              or ascribed to the User or any act/obligation by the User.</li>
+            <li>The User understands and agrees that the Good Time calculated are in accordance with the traditions
+              prescribed by Hindu astrology/Panchangam and Goodtimeguruji is not responsible for any deviation from such
+              traditions.</li>
+          </ul>
+
+          <h6 class="fw-bold mt-3">PAYMENT</h6>
+          <p>The consideration shall be paid by the User through the payment gateway provided by Goodtimeguruji subject
+            to such terms and conditions as may be prescribed.</p>
+
+          <h6 class="fw-bold mt-3">REFUND</h6>
+          <p>The terms of refund by the user and refund to the User shall be in accordance with the following refund
+            policy of Goodtimeguruji.</p>
+          <ul>
+            <li>User is permitted to use the application once after making the payment.</li>
+            <li>On successful completion of the payment, an online receipt will be generated by our website along with a
+              confirmation mail. Please contact our support <a
+                href="mailto:contact@goodtimeguruji.in">contact@goodtimeguruji.in</a> for any queries.</li>
+          </ul>
+
+          <h6 class="fw-bold mt-3">PROHIBITED USAGE / LIMITED RIGHT OF USE / LIMITED LICENCE</h6>
+          <p>Unless otherwise specified, all materials on the Application and Services are the property of
+            Goodtimeguruji and are protected under copyright, trademark and other applicable laws.</p>
+          <p>The trademarks, service marks and logos of Goodtimeguruji and others used in the Application and Services
+            ("Trademarks") are the property of Goodtimeguruji and their respective owners. The software, text, images,
+            graphics, data, prices, trades, charts, graphs, video, and audio used on this Application belong to
+            Goodtimeguruji. The trademarks and materials should not be copied, reproduced, modified, republished,
+            uploaded, transmitted, collected or distributed in any form or by any means, whether manual or automated.
+            Any unauthorized use of such property may violate copyright, trademark, and other applicable laws and could
+            result in criminal or civil legal actions and penalties.</p>
+          <p>It is the User's responsibility for maintaining the confidentiality of user account information, user
+            account password, bank account information, including your password/PIN, safeguarding your own money and for
+            all activity including transactions that are posted to or made from your Account. If there is suspicious
+            activity related to your Account, we may, but are not obligated, to request additional information from the
+            User, including authenticating documents, and to freeze any transactions pending our review. The User is
+            obligated to comply with these security requests, otherwise, Goodtimeguruji, at its sole discretion, may
+            choose to terminate the User Account.</p>
+
+          <h6 class="fw-bold mt-3">LIMITATION OF LIABILITY</h6>
+          <p>Goodtimeguruji shall not be held liable for any loss, damage or injury pertaining to use of the Application
+            and services offered by Goodtimeguruji or its consequences and it shall be the sole risk of the user. The
+            application and services provided by Goodtimeguruji are provided on an "as is", "where is" and "as
+            available" basis. Goodtimeguruji expressly disclaims all warranties of any kind whether express or implied.
+            Goodtimeguruji shall not be held liable for any defect, damage or vulnerability in the application, or loss
+            to the user due to such defect, damage or vulnerability.</p>
+          <p>Goodtimeguruji does not warrant that your access to the application and/or related services will be
+            uninterrupted or error-free, that defects will be corrected or that this website or the server that makes it
+            available, is free of viruses or other harmful components.</p>
+          <p>Goodtimeguruji, its employees, agents or contractors, shall not be liable for and in respect of any loss or
+            damage whether direct, indirect or consequential, including but not limited to loss of revenue, profit,
+            business, contracts, anticipated savings or goodwill, loss of use or value of any equipment including
+            software, whether foreseeable or not, suffered by the User or any person howsoever arising from the usage of
+            the Application or the services of Goodtimeguruji.</p>
+          <p>Any loss incurred by the user due to use of the Application by any other person with an express or implied
+            permission of the user. Goodtimeguruji shall not be held responsible for the confidentiality, secrecy and
+            security of the personal or account information being sent through the Application for effecting the user's
+            transactions.</p>
+          <p>Access to and use of the application and the information contained therein is at your own risk and
+            Goodtimeguruji does not undertake any accountability for any irregularities, viruses or damage to any mobile
+            phone or electronic device that results from accessing, availing or downloading of any information from the
+            application or any other website of which link is provided herewith.</p>
+          <p>Goodtimeguruji makes no warranty or representation of any kind in relation to the system and the network or
+            their function or performance or for any loss or damage whenever and howsoever suffered or incurred by the
+            User or by any person resulting from or in connection with the Application.</p>
+          <p>Goodtimeguruji shall be absolved of any liability in case there is any unauthorized use of the User's
+            access to Application, or Mobile Phone or for any fraudulent, duplicate or erroneous transaction initiated
+            or requested or instructed by use of the User's application or mobile phone.</p>
+          <p>The User fully and unconditionally agrees that Goodtimeguruji and its directors, officers, employees,
+            agents, sponsors, consultants, business partners or other representatives shall not be responsible or liable
+            for any direct, indirect, incidental, consequential, special, exemplary, punitive or any other damages
+            (including without limitation loss of profits, loss or corruption of data, loss of goodwill, work stoppage,
+            computer failure or malfunction or interruption of business) under any contract, negligence, strict
+            liability or other theory arising out of or relating in any way with the use of the application.</p>
+          <p>The User fully and unconditionally agrees and understands that a possibility exists that the application
+            could include inaccuracies or errors and further that Goodtimeguruji shall not be held liable for any such
+            inaccuracies or errors. In the event that such an inaccuracy arises, please inform Goodtimeguruji so that it
+            can be corrected.</p>
+          <p>Goodtimeguruji does not make any personal recommendations. The information on the application is provided
+            solely to enable the user to make their own decisions and does not constitute a recommendation to buy, sell
+            or otherwise deal in any investments, securities, loans or money.</p>
+          <p>The User understands and agrees that no joint venture, partnership, employment or agency relationship
+            exists between the user and Goodtimeguruji as a result of this agreement or on account of use of the
+            application.</p>
+          <p>Goodtimeguruji does not make any guarantee that the Good Time will result in any result, tangible or
+            intangible, real or imaginary, and the User agrees that the good time is calculated by the Astrology API
+            based on Hindu Astrology/Panchangam traditions provided by a third party agency.</p>
+
+          <h6 class="fw-bold mt-3">FORCE MAJEURE</h6>
+          <p>It is hereby expressly declared that neither Goodtimeguruji nor the User will be liable for any delay or
+            failure caused by conditions or events beyond the reasonable control of the respective party and the
+            validity and enforceability of any remaining provisions shall not be affected by any such condition.</p>
+
+          <h6 class="fw-bold mt-3">INDEMNIFICATION</h6>
+          <p>To the full extent permitted by applicable law, the User hereby agrees to indemnify Goodtimeguruji, and its
+            affiliates, officers, directors, agents, employees, and suppliers against any action, liability, cost,
+            claim, loss, damage, proceeding or expense suffered or incurred if directly or not directly arising from
+            your use of the Application and Services, or from your violation of these Terms of Use and applicable laws.
+          </p>
+
+          <h6 class="fw-bold mt-3">TAXES</h6>
+          <p>It is the User's responsibility to determine, collect, report and submit any taxes applicable to the
+            payments the User makes or receives in connection with the use of the Application and Services to the
+            appropriate tax authority. Goodtimeguruji is not responsible for determining whether taxes apply to your
+            transaction, or for collecting, reporting or remitting any taxes arising from any transaction. Further,
+            Goodtimeguruji will collect from the User and deposit with the government, Goods and Services Tax @ 18% as
+            applicable to the transactions.</p>
+
+          <h6 class="fw-bold mt-3">WAIVER</h6>
+          <p>Enforcement of the Terms is solely at our discretion and our failure to enforce a provision in some
+            instances does not constitute a waiver of our right to enforce such provision in other instances.</p>
+
+          <h6 class="fw-bold mt-3">SUPPLEMENTAL TERMS</h6>
+          <p>Supplemental terms may apply to certain Services, such as policies for a particular event, activity or
+            promotion, and such supplemental terms will be disclosed to the User in connection with the applicable
+            Service(s). Supplemental terms are in addition to, and shall be deemed a part of, these Terms for the
+            purposes of the applicable Service(s). Supplemental terms shall prevail over these Terms in the event of a
+            conflict with respect to the applicable Services.</p>
+
+          <h6 class="fw-bold mt-3">INTELLECTUAL PROPERTY</h6>
+          <p>The Application and all software/algorithm/code/metadata contained in the Application, the contents, user
+            interface, design and scheme of the Application, are proprietary to Goodtimeguruji and are protected by
+            worldwide copyright and other intellectual property laws. Except as stated herein, none of the materials may
+            be modified, copied, reproduced, distributed, republished, downloaded, displayed, sold, compiled, posted or
+            transmitted in any form or by any means, including but not limited to, electronic, mechanical, photocopying,
+            recording or other means, without the prior express written permission of Goodtimeguruji.</p>
+          <p>The User understands, acknowledges and agrees that Goodtimeguruji is the sole owner of all right, titles
+            and interest including any and all intellectual property rights in the Application, website, design,
+            software, interface, colour scheme, content, logos, trade names, brand names, designs, services and any such
+            intellectual property used in connection with the platform.</p>
+
+          <h6 class="fw-bold mt-3">SUSPENSION, TERMINATION AND CANCELLATION</h6>
+          <p>The User may terminate this agreement with Goodtimeguruji, and close the User Account at any time,
+            following the settlement of any pending transactions or any pending dues or outstanding amounts to
+            Goodtimeguruji.</p>
+          <p>The User agrees that Goodtimeguruji may, by giving notice, in its sole discretion, terminate your access to
+            the Application, Services and to your User Account; including without limitation, suspending or terminating
+            the Service and User's Accounts, prohibiting access to the Application and its content, services and tools,
+            delaying or removing hosted content, and taking technical and legal actions to keep Users off the
+            Application if we reasonably perceive that such Users are creating problems, including without limitation,
+            possible legal liabilities, infringement of the intellectual property rights, or acting inconsistently with
+            the letter or spirit of these Terms of Use.</p>
+          <p>Notwithstanding the above, Goodtimeguruji may, in appropriate circumstances and at our sole discretion,
+            suspend or terminate Accounts of Users for any reason, including without limitation (1) attempts to gain
+            unauthorized access to the Application and Services, (2) overcoming software security features limiting use
+            of or protecting any content, (3) usage of the Application and Services to perform illegal activities such
+            as money laundering, illegal gambling operations, financing terrorism, or other criminal activities, (4)
+            violations of these Terms of Use, (5) failure to pay or fraudulent payment for Transactions, (6) unexpected
+            operational difficulties, or (7) upon the request of law enforcement or other government agencies, if deemed
+            to be legitimate and compelling by Goodtimeguruji, acting in its sole discretion.</p>
+
+          <h6 class="fw-bold mt-3">MISCELLANEOUS</h6>
+          <p>The management of User Data shall be in accordance with the terms of the Privacy Policy, which is made
+            available to the User.</p>
+          <p>The User shall not assign or otherwise transfer rights or obligations under this agreement. Goodtimeguruji
+            may assign our rights and duties under this agreement without any such assignment being considered a change
+            to this agreement and without any notice to the User.</p>
+          <p>Any notices or other communications that the User wish to send to Goodtimeguruji may be addressed to <a
+              href="mailto:contact@goodtimeguruji.in">contact@goodtimeguruji.in</a>.</p>
+
+          <hr />
+        </div>
+
+        <!-- FOOTER -->
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary" id="acceptTermsBtn">Accept & Continue</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="loadingModal" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-body text-center p-5">
+
+          <img src="./assets/img/Loading.gif" alt="Loading" style="width:150px;">
+
+          <h5 class="mt-3">
+            Calculating Muhurat...
+          </h5>
+
+          <p class="text-muted mb-0">
+            Please wait. This may take a few moments.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- FOOTER -->
+  <footer class="footer-section">
+    <div class="footer-main">
+      <div class="container">
+        <div class="row g-4">
+          <!-- ABOUT -->
+          <div class="col-xl-6 col-lg-5 col-md-6">
+            <h5 class="footer-title mb-3">About Us</h5>
+            <p class="footer-text">Welcome to a sacred space where ancient wisdom meets modern convenience. We are
+              dedicated to providing accurate and authentic Muhurat timings based on time-honored Vedic astrological
+              principles.</p>
+          </div>
+
+          <!-- QUICK LINKS -->
+          <div class="col-xl-2 col-lg-3 col-md-6">
+            <h5 class="footer-title mb-3">Quick Links</h5>
+            <ul class="footer-links list-unstyled">
+              <li>
+                <a href="index.html">
+                  <i class="fa fa-angle-right me-2"></i>
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="muhurat-finder.html">
+                  <i class="fa fa-angle-right me-2"></i>
+                  Muhurat Finder
+                </a>
+              </li>
+              <li>
+                <a href="about-us.html">
+                  <i class="fa fa-angle-right me-2"></i>
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="contact-us.html">
+                  <i class="fa fa-angle-right me-2"></i>
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- CONTACT -->
+          <div class="col-xl-4 col-lg-4 col-md-6">
+            <h5 class="footer-title mb-3">Contact Us</h5>
+
+            <!-- <p class="footer-text mb-2">
+                <i class="fa fa-phone me-2"></i>
+                <a href="tel:+919409327907">+91 9409327907</a>
+              </p> -->
+            <p class="footer-text mb-2">
+              <i class="fa fa-envelope me-2"></i>
+              <a href="mailto:support@goodtimeguruji.in">
+                support@goodtimeguruji.in</a>
+            </p>
+            <!-- <p class="footer-text mb-3">
+                <i class="fa fa-map me-2"></i>
+                Sholinganallur, Chennai.
+              </p> -->
+
+            <!-- Social Icons -->
+            <h5 class="footer-title mb-3">Follow Us</h5>
+            <div class="footer-social">
+              <a href="#" class="icon-facebook"><i class="bi bi-facebook "></i></a>
+              <a href="#" class="icon-instagram"><i class="bi bi-instagram "></i></a>
+              <a href="#" class="icon-twitter"><i class="bi bi-twitter-x "></i></a>
+              <a href="#" class="icon-youtube"><i class="bi bi-youtube "></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM -->
+      </div>
+    </div>
+    <div class="copy-right">
+      <div class="container">
+        <div class="text-center footer-bottom">
+          <p class="mb-0">© 2026 Good Time Guruji. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./assets/js/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="./assets/js/bootstrap.min.js"></script>
+  <script src="./assets/js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document
+        .getElementById("submitBtn")
+        .addEventListener("click", submitService);
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const fromDate = document.getElementById("fromDate");
+      const toDate = document.getElementById("toDate");
+      const toDateValue = document.getElementById("toDateValue");
+      const toDateHint = document.getElementById("toDateHint");
+
+      if (!fromDate || !toDate) {
+        showToast("Date inputs not found. Please refresh the page.", "error");
+        return;
+      }
+
+      // Fix timezone issue
+      function formatDate(date) {
+        const d = new Date(date);
+        const month = ("0" + (d.getMonth() + 1)).slice(-2);
+        const day = ("0" + d.getDate()).slice(-2);
+        return d.getFullYear() + "-" + month + "-" + day;
+      }
+
+      function formatDateDisplay(dateStr) {
+        const [y, m, d] = dateStr.split("-");
+        return `${d}-${m}-${y}`;
+      }
+
+      // Get today's local date
+      const today = new Date();
+      const todayStr = formatDate(today);
+
+      fromDate.min = todayStr;
+
+      // toDate starts disabled
+      toDate.disabled = true;
+      toDateValue.value = "";
+
+      // Handle From Date change
+      fromDate.addEventListener("change", function () {
+        const selectedFrom = this.value;
+
+        if (!selectedFrom) {
+          // fromDate cleared — lock toDate again
+          toDate.disabled = true;
+          toDate.value = "";
+          toDateValue.value = "";
+          if (toDateHint) toDateHint.style.display = "none";
+          return;
+        }
+
+        const from = new Date(selectedFrom);
+
+        // Cap to 90 days (3 months)
+        const max = new Date(from);
+        max.setDate(from.getDate() + 90);
+
+        const maxStr = formatDate(max);
+
+        toDate.disabled = false;
+        toDate.value = formatDateDisplay(maxStr);
+        toDateValue.value = maxStr;
+        if (toDateHint) toDateHint.style.display = "inline";
+      });
+
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const loginPromptMsg = document.getElementById("loginPromptMsg");
+
+      // Check if user is logged in
+      function isLoggedIn() {
+        const token = localStorage.getItem("token");
+        const expiry = localStorage.getItem("token_expiry");
+        return token && expiry && Date.now() < parseInt(expiry);
+      }
+
+      // Just show/hide the login prompt — actual validation (login, terms,
+      // service selection) happens inside submitService() when the button
+      // is clicked, so the button itself is never left in a stuck/disabled state.
+      if (loginPromptMsg) {
+        loginPromptMsg.style.display = isLoggedIn() ? "none" : "block";
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const acceptBtn = document.getElementById("acceptTermsBtn");
+      const mainCheckbox = document.getElementById("terms");
+
+      // When user clicks Accept & Continue
+      if (acceptBtn && mainCheckbox) {
+        acceptBtn.addEventListener("click", function () {
+          // ✅ Tick checkbox
+          mainCheckbox.checked = true;
+
+          // ✅ Close modal (Bootstrap 4)
+          $('#termsModal').modal('hide');
+        });
+      }
+
+    });
+  </script>
+
+  <script>
+    const API_BASE_URL = window.location.origin;
+
+    // ================= TESTING / BACKEND BUILD =================
+    // Order creation and the Razorpay payment gateway have been removed for
+    // this test build — submitting the form calls the Muhurat API directly
+    // and redirects to muhurat-resultbackend.html.
+    async function submitService() {
+
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        showToast("Please log in before proceeding.", "warning");
+        window.location.href = "login.html";
+        return;
+      }
+
+      const btn = document.getElementById("submitBtn");
+      const btnText = document.getElementById("btnText");
+      const loader = document.getElementById("btnLoader");
+
+      btn.disabled = true;
+      btnText.innerText = "Finding Muhurat...";
+      loader.style.display = "inline-block";
+
+      try {
+
+        if (!document.getElementById("terms").checked) {
+          throw new Error("Please accept Terms & Conditions");
+        }
+
+        const selectedService =
+          document.getElementById("functionService").value;
+
+        if (!selectedService) {
+          throw new Error("Please select a service");
+        }
+
+        showLoadingModal();
+
+        try {
+          await fetchMuhuratResult();
+          // fetchMuhuratResult() navigates to muhurat-resultbackend.html on
+          // success, so execution normally won't continue past this point.
+        } catch (err) {
+          hideLoadingModal();
+          throw err;
+        }
+
+      } catch (err) {
+        alert(err.message || "Something went wrong. Please try again.");
+        resetButton();
+      }
+
+      function resetButton() {
+        btn.disabled = false;
+        loader.style.display = "none";
+        btnText.innerText = "Find Muhurat";
+      }
+    }
+  </script>
+  <script>
+    async function fetchMuhuratResult() {
+
+      const selectedService =
+        document.getElementById("functionService").value;
+      const data = {
+        fromDateStr:
+          document.getElementById("fromDate").value,
+
+        toDateStr:
+          document.getElementById("toDateValue").value,
+
+        userNakshatra:
+          document.getElementById("nakshatram").value,
+
+        userRasi:
+          document.getElementById("rasi").value,
+
+        place:
+          document.getElementById("locationInput").value,
+
+        lat:
+          document.getElementById("lat").value,
+
+        lon:
+          document.getElementById("lon").value,
+
+        tzone:
+          document.getElementById("timezone").value
+      };
+
+      const res = await fetch(
+        `${API_BASE_URL}/${selectedService}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              `Bearer ${localStorage.getItem("token")}`
+          },
+          body: JSON.stringify(data)
+        }
+      );
+
+      if (res.status === 401) {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+        throw new Error("Session expired. Please login again.");
+      }
+
+      if (!res.ok) {
+        throw new Error("Muhurat API failed");
+      }
+
+      const responseData = await res.json();
+      const functionDropdown =
+        document.getElementById("functionService");
+
+      const functionName =
+        functionDropdown.options[
+          functionDropdown.selectedIndex
+        ].text;
+
+      localStorage.setItem(
+        "muhuratResults",
+        JSON.stringify({
+          ...responseData,
+          selectedFunction: functionName,
+          // requestId comes back from the server so search history can link to it
+          requestId: responseData.requestId || null
+        })
+      );
+
+      // Testing/backend build: send the user to muhurat-resultbackend.html
+      // instead of the normal (post-payment) muhurat-result.html.
+      window.location.href = "muhurat-resultbackend.html";
+    }
+    function showLoadingModal() {
+      $("#loadingModal").modal({
+        backdrop: "static",
+        keyboard: false
+      });
+
+      $("#loadingModal").modal("show");
+    }
+
+    function hideLoadingModal() {
+      $("#loadingModal").modal("hide");
+    }
+  </script>
+  <script>
+    // ================= SUBMIT BUTTON VALIDATION =================
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const submitBtn = document.getElementById("submitBtn");
+
+      function updateSubmitButton() {
+
+        const location =
+          document.getElementById("locationInput").value.trim();
+
+        const lat =
+          document.getElementById("lat").value.trim();
+
+        const lon =
+          document.getElementById("lon").value.trim();
+
+        const timezone =
+          document.getElementById("timezone").value.trim();
+
+        const nakshatra =
+          document.getElementById("nakshatram").value;
+
+        const rasi =
+          document.getElementById("rasi").value;
+
+        const service =
+          document.getElementById("functionService").value;
+
+        const fromDate =
+          document.getElementById("fromDate").value;
+
+        const terms =
+          document.getElementById("terms").checked;
+
+        const loggedIn =
+          localStorage.getItem("token") &&
+          localStorage.getItem("token_expiry") &&
+          Date.now() < Number(localStorage.getItem("token_expiry"));
+
+        submitBtn.disabled = !(
+          loggedIn &&
+          location &&
+          lat &&
+          lon &&
+          timezone &&
+          nakshatra &&
+          rasi &&
+          service &&
+          fromDate &&
+          terms
+        );
+      }
+
+      [
+        "locationInput",
+        "nakshatram",
+        "rasi",
+        "functionService",
+        "fromDate",
+        "terms"
+      ].forEach(id => {
+
+        const el = document.getElementById(id);
+
+        if (!el) return;
+
+        el.addEventListener("change", updateSubmitButton);
+        el.addEventListener("input", updateSubmitButton);
+      });
+
+      // make available globally
+      window.updateSubmitButton = updateSubmitButton;
+
+      updateSubmitButton();
+    });
+  </script>
+
+  <!-- ================= PRESELECT SERVICE FROM QUERY PARAM =================
+       Lets service-detail pages (e.g. start-business-muhurat.html) deep-link
+       into this finder with the right "Muhurat For" option already chosen,
+       e.g. muhurat-finder.html?service=Start%20Business
+       This reads the existing #functionService dropdown that is already
+       rendered above — it does not duplicate or hardcode a second service list.
+  ==================================================================== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const requestedService = params.get("service");
+      if (!requestedService) return; // no param — behave exactly as before
+
+      const select = document.getElementById("functionService");
+      if (!select) return;
+
+      // Normalize by comparing only the primary (pre-"/") part of each
+      // option's label, case- and punctuation-insensitively, so links like
+      // ?service=Start%20Business match "Start Business / Commencement of
+      // Business Operations" without needing a second copy of the list.
+      const normalize = (str) =>
+        String(str)
+          .split("/")[0]
+          .trim()
+          .toLowerCase()
+          .replace(/[^a-z0-9]/g, "");
+
+      const target = normalize(requestedService);
+      if (!target) return;
+
+      let matchedOption = null;
+      for (const option of select.options) {
+        if (!option.value) continue;
+        if (normalize(option.text) === target) {
+          matchedOption = option;
+          break;
+        }
+      }
+
+      // Invalid/unrecognized service param — just fall back to normal behaviour.
+      if (!matchedOption) return;
+
+      select.value = matchedOption.value;
+      // Fire the existing change handling (validation, etc.) — no new logic duplicated.
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+      if (typeof window.updateSubmitButton === "function") {
+        window.updateSubmitButton();
+      }
+
+      const formSection = document.getElementById("service-form");
+      if (formSection) {
+        formSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  </script>
+</body>
+
+</html>

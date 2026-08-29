@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Auspicious Services</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input,
+    select,
+    button {
+      padding: 8px;
+      width: 300px;
+      margin-top: 5px;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      margin-top: 15px;
+    }
+
+    .result {
+      background: white;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    .result-item {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #eee;
+      border-radius: 4px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .suggestions-box {
+      width: 300px;
+      background: white;
+      border: 1px solid #ccc;
+      max-height: 200px;
+      overflow-y: auto;
+      position: absolute;
+      z-index: 1000;
+    }
+
+    .suggestion-item {
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .suggestion-item:hover {
+      background: #f1f1f1;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>🔆 Select a Service</h2>
+  <label for="serviceSelect">Choose a service:</label>
+  <select id="serviceSelect" required onchange="toggleForm()">
+    <option value="">-- Select --</option>
+    <option value="runAuspiciousCheckAcrossDates">General</option>
+    <option value="runAuspiciousCheckAcrossDatesDeivaPrathishta">Deiva Prathishta</option>
+    <option value="runAuspiciousCheckAcrossDatesAksharaaramba">Aksharaaramba</option>
+    <option value="runAuspiciousCheckAcrossDatesAnnaprasana">Annaprasana</option>
+    <option value="runAuspiciousCheckAcrossDatesInvestment">Investment</option>
+    <option value="runAuspiciousCheckAcrossDatesVidhyaarambha">Vidhyaarambha</option>
+    <option value="runAuspiciousCheckAcrossDatesPumsuvanam">Pumsuvanam</option>
+    <option value="runAuspiciousCheckAcrossDatesVishnuBali">Vishnu Bali</option>
+    <option value="runAuspiciousCheckAcrossDatesDeliveryAdmission">Delivery Admission</option>
+    <option value="runAuspiciousCheckAcrossDatesChildCradling">Child Cradling</option>
+    <option value="runAuspiciousCheckAcrossDatesHeadShave">Head Shave</option>
+    <option value="runAuspiciousCheckAcrossDatesNewPortfolio">New Portfolio</option>
+    <option value="runAuspiciousCheckAcrossDatesUpanayanam">Upanayanam</option>
+    <option value="runAuspiciousCheckAcrossDatesTravel">Travel</option>
+    <option value="runAuspiciousCheckAcrossDatesConstruction">Construction</option>
+    <option value="runAuspiciousCheckAcrossDatesGruhaPravesam">Gruha Pravesam</option>
+    <option value="runAuspiciousCheckAcrossDatesNilaiPadi">Nilai Padi</option>
+    <option value="runAuspiciousCheckAcrossDatesVehiclePurchase">Vehicle Purchase</option>
+    <option value="runAuspiciousCheckAcrossDatesStartBuisiness">Start Business</option>
+    <option value="runAuspiciousCheckAcrossDatesTakingMedicine">Taking Medicine</option>
+    <option value="runAuspiciousCheckAcrossDatesSurgery">Surgery</option>
+    <option value="runAuspiciousCheckAcrossDatesArogyaSnanam">Arogya Snanam</option>
+    <option value="runAuspiciousCheckAcrossDatesOilBath">Oil Bath</option>
+    <option value="runAuspiciousCheckAcrossDatesBhooPravesam">Bhoo Pravesam</option>
+    <option value="runAuspiciousCheckAcrossDatesCultivation">Cultivation</option>
+    <option value="runAuspiciousCheckAcrossDatesPlantingSeeds">Planting Seeds</option>
+    <option value="runAuspiciousCheckAcrossDatesCuttingGrains">Cutting Grains</option>
+    <option value="runAuspiciousCheckAcrossDatesLandRegistration">Land Registration</option>
+    <option value="runAuspiciousCheckAcrossDatesExamFees">Exam Fees</option>
+    <option value="runAuspiciousCheckAcrossDatesProdtest">test </option>
+  </select>
+
+  <div id="serviceForm" class="hidden">
+    <label>Nakshatra:</label>
+    <select id="nakshatra" required>
+      <option value="">-- Select Nakshatra --</option>
+      <option value="Ashwini">Ashvini / Ashvathi</option>
+      <option value="Bharani">Bharani</option>
+      <option value="Krittika">Krittika / Karthigai</option>
+      <option value="Rohini">Rohini</option>
+      <option value="Mrigashira">Mrigashira / Mrigaseerisham</option>
+      <option value="Ardhra">Ardra / Thiruvathirai</option>
+      <option value="Punarvasu">Punarvasu / Punarpoosam</option>
+      <option value="Pushya">Pushya / Poosam</option>
+      <option value="Ashlesha">Ashlesha / Ayilyam</option>
+      <option value="Magha">Magha / Magham</option>
+      <option value="Purva Phalguni">Purva Phalguni / Pooram</option>
+      <option value="Uttara Phalguni">Uttara Phalguni / Uthram</option>
+      <option value="Hasta">Hasta / Hastham</option>
+      <option value="Chitra">Chitra / Chithirai</option>
+      <option value="Swati">Swati / Swathi</option>
+      <option value="Vishakha">Vishakha / Vishakam</option>
+      <option value="Anuradha">Anuradha / Anusham</option>
+      <option value="Jyeshtha">Jyeshtha / Kettai</option>
+      <option value="Moola">Moola / Moolam</option>
+      <option value="Purva Ashadha">Purva Ashadha / Pooradam</option>
+      <option value="Uttara Ashadha">Uttara Ashadha / Uthradam</option>
+      <option value="Shravan">Shravana / Thiruvonam</option>
+      <option value="Dhanishta">Dhanishta / Avittam</option>
+      <option value="Shatabhisha">Shatabhisha / Sathayam</option>
+      <option value="Purva Bhadrapada">Purva Bhadrapada / Purattadhi</option>
+      <option value="Uttara Bhadrapada">Uttara Bhadrapada / Uthirattadhi</option>
+      <option value="Revati">Revati / Revathi</option>
+    </select>
+
+    <label>Rasi:</label>
+    <select id="rasi" required>
+      <option value="">-- Select Rasi --</option>
+      <option value="Aries">Aries (Mesham)</option>
+      <option value="Taurus">Taurus (Rishabam)</option>
+      <option value="Gemini">Gemini (Mithunam)</option>
+      <option value="Cancer">Cancer (Kadagam)</option>
+      <option value="Leo">Leo (Simham)</option>
+      <option value="Virgo">Virgo (Kanni)</option>
+      <option value="Libra">Libra (Thulam)</option>
+      <option value="Scorpio">Scorpio (Vrischikam)</option>
+      <option value="Sagittarius">Sagittarius (Dhanusu)</option>
+      <option value="Capricorn">Capricorn (Makaram)</option>
+      <option value="Aquarius">Aquarius (Kumbam)</option>
+      <option value="Pisces">Pisces (Meenam)</option>
+    </select>
+
+    <label>From Date:</label>
+    <input type="date" id="fromDate" required>
+    <label>To Date:</label>
+    <input type="date" id="toDate" required>
+
+    <label>Location:</label>
+    <input type="text" id="locationInput" placeholder="Search location..." autocomplete="off">
+    <div id="suggestions" class="suggestions-box"></div>
+
+    <input type="hidden" id="lat">
+    <input type="hidden" id="lon">
+    <input type="hidden" id="timezone">
+
+    <button type="button" onclick="submitService()">✅ Submit</button>
+  </div>
+
+  <div id="output" class="result"></div>
+
+  <script>
+    const API_BASE_URL = "http://localhost:3000"; // 🔧 Change for production
+
+    let selectedService = "";
+
+    function toggleForm() {
+      selectedService = document.getElementById("serviceSelect").value;
+      document.getElementById("serviceForm").classList.toggle("hidden", !selectedService);
+      document.getElementById("output").innerHTML = "";
+    }
+
+    // Set min dates
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("fromDate").setAttribute("min", today);
+    document.getElementById("toDate").setAttribute("min", today);
+    document.getElementById("fromDate").addEventListener("change", function () {
+      document.getElementById("toDate").setAttribute("min", this.value);
+    });
+
+    let debounceTimer;
+
+    document.getElementById("locationInput").addEventListener("input", function () {
+      clearTimeout(debounceTimer);
+      const query = this.value.trim();
+
+      if (!query) {
+        document.getElementById("suggestions").innerHTML = "";
+        return;
+      }
+
+      debounceTimer = setTimeout(() => {
+        fetchLocations(query);
+      }, 400); // debounce
+    });
+
+    async function fetchLocations(query) {
+      const box = document.getElementById("suggestions");
+      box.innerHTML = "Searching...";
+
+      try {
+        const apiKey = "28c4501555ee44698a1510d3b1a41dce";
+
+        const res = await fetch(
+          `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(query)}&limit=10&format=json&apiKey=${apiKey}`
+        );
+
+        const data = await res.json();
+        const places = data.results || [];
+
+        if (!places.length) {
+          box.innerHTML =
+            "<div class='suggestion-item'>No results found</div>";
+          return;
+        }
+
+        window.locationResults = places;
+
+        box.innerHTML = "";
+
+        places.forEach((place, index) => {
+          const div = document.createElement("div");
+
+          div.className = "suggestion-item";
+
+          div.textContent =
+            place.formatted ||
+            place.city ||
+            place.address_line1 ||
+            "Unknown Location";
+
+          div.onclick = () => selectLocation(index);
+
+          box.appendChild(div);
+        });
+
+      } catch (err) {
+        console.error(err);
+
+        box.innerHTML =
+          "<div class='suggestion-item'>Error fetching locations</div>";
+      }
+    }
+
+    function selectLocation(index) {
+      const place = window.locationResults[index];
+
+      document.getElementById("locationInput").value =
+        place.formatted;
+
+      document.getElementById("lat").value =
+        place.lat;
+
+      document.getElementById("lon").value =
+        place.lon;
+
+      // Convert seconds to hours
+      const timezoneOffset =
+        (place.timezone?.offset_STD_seconds || 0) / 3600;
+
+      document.getElementById("timezone").value =
+        timezoneOffset;
+
+      console.log("Selected Location:", {
+        place: place.formatted,
+        lat: place.lat,
+        lon: place.lon,
+        timezone: timezoneOffset
+      });
+
+      document.getElementById("suggestions").innerHTML = "";
+    }
+
+    async function submitService() {
+      const data = {
+        fromDateStr: document.getElementById("fromDate").value,
+        toDateStr: document.getElementById("toDate").value,
+        userNakshatra: document.getElementById("nakshatra").value,
+        userRasi: document.getElementById("rasi").value,
+        place: document.getElementById("locationInput").value,
+        lat: document.getElementById("lat").value,
+        lon: document.getElementById("lon").value,
+        tzone: document.getElementById("timezone").value
+      };
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/${selectedService}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        const { filtered, common } = await res.json();
+        const output = document.getElementById("output");
+        output.innerHTML = "";
+
+        function renderResults(results, title) {
+          if (!results || !results.length) return;
+          const section = document.createElement("div");
+          section.innerHTML = `<h3>${title}</h3>`;
+          results.forEach(item => {
+            const block = document.createElement("div");
+            block.className = "result-item";
+
+            const tr = (item.timerange || [])
+              .map(t => `• ${t.start_time.split(" ")[1]} → ${t.end_time.split(" ")[1]}`)
+              .join("<br>");
+
+            block.innerHTML = `
+            <b>📅 ${item.date}</b><br>
+            🔯 Nakshatra: ${item.nakshatraStr || "—"}<br>
+            📜 Tithi: ${item.tithiStr || "—"}<br>
+            🧘 Yoga: ${item.yogaStr || "—"}<br>
+            🔗 Karana: ${item.karanaStr || "—"}<br>
+            📅 Wara: ${item.wara || "—"}<br>
+            ⏰ Time:<br>${tr || "No valid intervals"}
+          `;
+            section.appendChild(block);
+          });
+          output.appendChild(section);
+        }
+
+        renderResults(common, "📜 Best Time");
+        renderResults(filtered, "✨ Next Best Time");
+
+        if (!output.innerHTML) {
+          output.innerHTML = "<p>No auspicious times found.</p>";
+        }
+      } catch (err) {
+        document.getElementById("output").innerHTML = `<p style="color:red">Error: ${err.message}</p>`;
+      }
+    }
+  </script>
+
+</body>
+
+</html>

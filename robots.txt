@@ -1,0 +1,9 @@
+User-agent: *
+
+Allow: /
+
+Disallow: /login.html
+Disallow: /payment.html
+Disallow: /checkout.html
+
+Sitemap: https://goodtimeguruji.in/sitemap.xml

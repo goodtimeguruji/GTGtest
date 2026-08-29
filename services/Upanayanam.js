@@ -1,0 +1,12 @@
+import { runAuspiciousCheck } from "./muhurat-core.js";
+
+const CONFIG = {
+  secondNakshatraList: ["Ashwini","Rohini","Mrigashira","Punarvasu","Pushya","Uttara Phalguni","Hasta","Chitra","Swati","Anuradha","Uttara Ashadha","Shravan","Uttara Bhadrapada","Revati"],
+  disallowedTithis:    ["Pratipada","Chaturthi","Ashtami","Navami","Ekadashi","Chaturdashi","Purnima","Amavasya"],
+  timeMode:            "morning",  // morning=00-13 | day=00-18 | evening=18-24
+  lagnaPlace:          8   // which house must be empty in planetary positions
+};
+
+export default function runAuspiciousCheckAcrossDatesUpanayanam(fromDateStr, toDateStr, userNakshatra, userRasi, lat, lon, tzone, place) {
+  return runAuspiciousCheck(fromDateStr, toDateStr, userNakshatra, userRasi, lat, lon, tzone, place, CONFIG);
+}

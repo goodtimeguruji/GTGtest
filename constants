@@ -1,0 +1,15 @@
+export const NAKSHATRAS = [
+ 'Ashwini', 'Bharani', 'Krittika', 'Rohini',
+    'Mrigashira', 'Ardhra', 'Punarvasu', 'Pushya',
+    'Ashleysha', 'Magha', 'Purva Phalguni', 'Uttara Phalguni',
+    'Hasta', 'Chitra', 'Swati', 'Vishakha',
+    'Anuradha', 'Jyeshtha', 'Moola', 'Poorva Ashadha',
+    'Uttara Ashadha', 'Shravan', 'Dhanishta', 'Satabhisha',
+    'Poorva Bhadrapada', 'Uttara Bhadrapada', 'Revati'
+];
+
+export const RASIS = [
+  "Aries", "Taurus", "Gemini", "Cancer", "Leo", 
+  "Virgo", "Libra", "Scorpio", "Sagittarius", 
+  "Capricorn", "Aquarius", "Pisces"
+];
